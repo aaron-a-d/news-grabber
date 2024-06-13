@@ -1,0 +1,6 @@
+streamlit
+requests
+openai
+beautifulsoup4
+orjson
+scrapingbee
