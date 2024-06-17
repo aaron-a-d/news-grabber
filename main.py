@@ -130,7 +130,7 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
 
     def display_open_graph_metadata(metadata):
         if metadata:
-            st.markdown(f"{metadata.get('og:title', '')}")
+            st.markdown(f"#### {metadata.get('og:title', '')}")
             st.image(metadata.get('og:image', ''), caption=metadata.get('og:description', ''), width=600)
             st.markdown(f"{metadata.get('og:description', '')}")
             st.markdown(f"{metadata.get('og:url', '')}")
