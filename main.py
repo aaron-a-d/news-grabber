@@ -80,7 +80,7 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
     client_openai = OpenAI(api_key=OPENAI_KEY)
 
     @st.cache_data(ttl=3600)
-    def scrap(target_url):
+    def scrape(target_url):
         response = client_scrap.get(target_url)
         return response.text
 
@@ -142,7 +142,7 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
     article_url = st.text_input("Enter the article link:")
 
     if len(article_url) > 0:
-        html_text = scrap(article_url)
+        html_text = scrape(article_url)
         html_article = get_article_details_kan(html_text)
         article_json = ask_gpt(prompts['extract_content'].format(text=html_article), json=True)
         metadata_properties = extract_meta_properties(html_text)
