@@ -188,3 +188,8 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
             st.markdown(f"#### {article_json['title']}")
             st.write(f"{article_json['time']}")
             st.write(f"{article_json['content']}")
+
+        with st.expander("What / Where / Who JSONs"):
+            st.json(what)
+            st.json(where)
+            st.json(who)
