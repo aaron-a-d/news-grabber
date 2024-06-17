@@ -186,7 +186,7 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
 
             st.subheader("Source")
             st.markdown(f"#### {article_json['title']}")
-            st.write(f"{article_json['time']}")
+            st.caption(f"{article_json['time']}")
             st.write(f"{article_json['content']}")
 
         with st.expander("What / Where / Who JSONs"):
