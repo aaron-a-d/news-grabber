@@ -160,10 +160,12 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
         with col1:
             st.subheader("Social Media Snippet")
             display_open_graph_metadata(metadata_properties)
+            st.divider()
 
             col1.subheader("AI Analysis")
             col1.markdown(f"#### {article_json['title_en']}")
             col1.write(article_json['summary'])
+            st.divider()
 
             st.subheader("What")
             for e in what['what']:
@@ -176,6 +178,7 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
             st.subheader("Who")
             for e in who['who']:
                 st.write(f"- **{e['name']}**: {e['desc']}")
+            st.divider()
 
         # Right Column
         with col2:
@@ -183,11 +186,13 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
             st.markdown(f"#### {article_json['title_en']}")
             st.caption(f"{article_json['time']}")
             st.write(f"{article_json['content_en']}")
+            st.divider()
 
             st.subheader("Source")
             st.markdown(f"#### {article_json['title']}")
             st.caption(f"{article_json['time']}")
             st.write(f"{article_json['content']}")
+            st.divider()
 
         with st.expander("What / Where / Who JSONs"):
             st.json(what)
