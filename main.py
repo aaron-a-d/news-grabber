@@ -79,7 +79,7 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
     client_scrap = ScrapingBeeClient(api_key=SCRAPINGBEE_KEY)
     client_openai = OpenAI(api_key=OPENAI_KEY)
 
-    @st.cache_data(ttl=3600)
+    @st.cache_data(ttl=3600*24)
     def scrape(target_url):
         response = client_scrap.get(target_url)
         return response.text
@@ -94,10 +94,10 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
         return str(soup)
 
 
-    @st.cache_data(ttl=3600)
+    @st.cache_data(ttl=3600*24)
     def ask_gpt(prompt, json=False):
         response = client_openai.chat.completions.create(
-            model="gpt-3.5-turbo-0125",
+            model="gpt-4o",  # gpt-4o | gpt-3.5-turbo-0125
             temperature=0,
             max_tokens=4000,
             response_format={"type": "json_object"} if json else None,
