@@ -178,7 +178,7 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
 
             st.subheader("Where")
             for e in where['where']:
-                st.write(f"- **{e['country']}, {e['city']}, {e['name']}**: {e['desc']}")
+                st.write(f"- **{e['city']} ({e['country']})**: {e['desc']}")
 
             st.subheader("Who")
             for e in who['who']:
