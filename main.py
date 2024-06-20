@@ -20,7 +20,7 @@ else:
 
 prompts = {
     "translate": """
-        Translate this text into english.
+        Translate the following text to english and reply the result in JSON with the following key: "text"
         TEXT:
         {text}
     
@@ -152,8 +152,10 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
         html_article = get_article_details_kan(html_text)
         article_json = ask_gpt(prompts['extract_content'].format(text=html_article), json=True)
         metadata_properties = extract_meta_properties(html_text)
-        metadata_properties['og:title'] = ask_gpt(prompts["translate"].format(text=metadata_properties['og:title']))
-        metadata_properties['og:description'] = ask_gpt(prompts["translate"].format(text=metadata_properties['og:description']))
+        og_title = ask_gpt(prompts["translate"].format(text=metadata_properties['og:title']), json=True)
+        metadata_properties['og:title'] = og_title.get("text", "")
+        og_description = ask_gpt(prompts["translate"].format(text=metadata_properties['og:description']), json=True)
+        metadata_properties['og:description'] = og_description.get("text", "")
 
         what = ask_gpt(prompts['what'].format(text=article_json['content_en']), json=True)
         where = ask_gpt(prompts['where'].format(text=article_json['content_en']), json=True)
