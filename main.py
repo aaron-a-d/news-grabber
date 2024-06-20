@@ -69,7 +69,8 @@ prompts = {
         - content: article itself in the original language.
         - title_en: the title translated in english.
         - content_en: the article translated in english.
-        - summary: Summarize the article in 150 words or less in English. Put emphasis on the main argument and the names of people and entities involved. Include one single quote from the text best supporting the main argument. 
+        - summary: Summarize the article in 150 words or less in English. Put emphasis on the main argument and the names of people and entities involved. Include one single quote from the text best supporting the main argument.
+        - summary_title: Summarize the text between the tags `text` in a news-like punch-line in English. Put emphasis on the text's main argument and the identities involved. Omit period or full stop at the end of the result.
         
         
         <html>
@@ -168,7 +169,7 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
             st.divider()
 
             col1.subheader("AI Analysis")
-            col1.markdown(f"#### {article_json['title_en']}")
+            col1.markdown(f"#### {article_json['summary_title']}")
             col1.write(article_json['summary'])
             st.divider()
 
