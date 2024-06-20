@@ -194,7 +194,7 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
             st.write(f"{article_json['content']}")
             st.divider()
 
-        with st.expander("What / Where / Who JSONs"):
-            st.json(what)
-            st.json(where)
-            st.json(who)
+        # with st.expander("What / Where / Who JSONs"):
+        #     st.json(what)
+        #     st.json(where)
+        #     st.json(who)
