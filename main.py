@@ -4,14 +4,19 @@ import streamlit as st
 from openai import OpenAI
 import datetime
 from urllib.parse import urlparse
+import os
 from bs4 import BeautifulSoup
 from scrapingbee import ScrapingBeeClient
 import orjson
 
 st.set_page_config(layout="wide")
 
-OPENAI_KEY = st.sidebar.text_input("Enter your OpenAI API key:", type="password")
-SCRAPINGBEE_KEY = st.sidebar.text_input("Enter your ScrapingBee API key:", type="password")
+if not os.environ.get('openai') or not os.environ.get('scrapingbee'):
+    OPENAI_KEY = st.sidebar.text_input("Enter your OpenAI API key:", type="password")
+    SCRAPINGBEE_KEY = st.sidebar.text_input("Enter your ScrapingBee API key:", type="password")
+else:
+    OPENAI_KEY = os.environ['openai']
+    SCRAPINGBEE_KEY = os.environ['scrapingbee']
 
 prompts = {
     "translate": """
