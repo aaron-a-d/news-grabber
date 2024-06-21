@@ -137,11 +137,12 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
     def display_open_graph_metadata(metadata):
         if metadata:
             st.markdown(f"#### {metadata.get('og:title', '')}")
-            st.image(metadata.get('og:image', ''), caption=metadata.get('og:description', ''), width=600)
+            if metadata.get('og:image'):
+                st.image(metadata.get('og:image'), caption=metadata.get('og:description', ''), width=600)
             st.markdown(f"{metadata.get('og:description', '')}")
             st.markdown(f"{metadata.get('og:url', '')}")
             if metadata.get('article:published_time'):
-                st.markdown(f"**Published Time:** {metadata.get('article:published_time')}")
+                st.markdown(f"{metadata.get('article:published_time')}")
         else:
             st.write("No Open Graph Data.")
 
@@ -152,7 +153,6 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
         html_article = get_article_details_kan(html_text)
         article_json = ask_gpt(prompts['extract_content'].format(text=html_article), json=True)
         metadata_properties = extract_meta_properties(html_text)
-        print("metadata_properties", metadata_properties)
         og_title = ask_gpt(prompts["translate"].format(text=metadata_properties.get('og:title', '')), json=True)
         metadata_properties['og:title'] = og_title.get("text", "")
         og_description = ask_gpt(prompts["translate"].format(text=metadata_properties.get('og:description', '')), json=True)
