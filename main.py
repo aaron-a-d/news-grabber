@@ -153,9 +153,9 @@ if OPENAI_KEY and SCRAPINGBEE_KEY:
         article_json = ask_gpt(prompts['extract_content'].format(text=html_article), json=True)
         metadata_properties = extract_meta_properties(html_text)
         print("metadata_properties", metadata_properties)
-        og_title = ask_gpt(prompts["translate"].format(text=metadata_properties['og:title']), json=True)
+        og_title = ask_gpt(prompts["translate"].format(text=metadata_properties.get('og:title', '')), json=True)
         metadata_properties['og:title'] = og_title.get("text", "")
-        og_description = ask_gpt(prompts["translate"].format(text=metadata_properties['og:description']), json=True)
+        og_description = ask_gpt(prompts["translate"].format(text=metadata_properties.get('og:description', '')), json=True)
         metadata_properties['og:description'] = og_description.get("text", "")
 
         what = ask_gpt(prompts['what'].format(text=article_json['content_en']), json=True)
